@@ -56,7 +56,7 @@ flowchart LR
 
 **Ranked STRIDE register:** S: spoofing; T: tampering; R: repudiation; I: information disclosure; D: denial of service; E: elevation of privilege. Impact and likelihood range from 1 (low) to 5 (high); risk = impact × likelihood. Scores assume feature reachability; starred rows are conditional. "Unknown" means not checked.
 
-| # | Element / boundary | STRIDE | Threat | Existing control / limitation | Impact×likelihood
+| # | Element / boundary | STRIDE | Threat | Existing control / limitation | Impact×likelihood | Lab that proves it |
 |---|---|---|---|---|---|---|
 | 1 | Search → DB, B2 | T/I | Input changes SQL; exposes accounts | Query binding unknown | 5×4=20 | Lab 1: SQL injection |
 | 2 | Ticket ownership, B6 | E/I | Customer reads/edits another user's ticket | Roles documented; object checks unknown | 5×4=20 | Lab 5: access control |
@@ -71,4 +71,4 @@ flowchart LR
 | 11 | Submissions / generation*, B1/B4 | D | Repetition exhausts storage/compute/budget | Nginx 10 MB/request; quotas unknown | 3×4=12 | Resource consumption |
 | 12 | Ticket / tool actions*, B6/B3 | R | Actor denies action without attributable evidence | Audit coverage/integrity unknown | 3×3=9 | Logging / monitoring |
 
-**Priorities and controls.** Investigate #1 and #2 first for potentially broad account/ticket exposure, then #3 if shell tooling exists for application compromise. #1: **input handling**, parameterized queries at database calls, provisionally the cheapest effective high-impact control if affected calls are few; #2: **access control**, server-side ownership/role checks before every read/write, including media. #3: **architecture**, restricted tools and least-privilege execution isolation, with approval for consequential actions; input validation alone cannot establish user authority (#2) or constrain agent authority (#3).
+**Priorities and controls:** Investigate #1 and #2 first for potentially broad account/ticket exposure, then #3 if shell tooling exists for application compromise. #1: **input handling**, parameterized queries at database calls, provisionally the cheapest effective high-impact control if affected calls are few; #2: **access control**, server-side ownership/role checks before every read/write, including media. #3: **architecture**, restricted tools and least-privilege execution isolation, with approval for consequential actions; input validation alone cannot establish user authority (#2) or constrain agent authority (#3).
